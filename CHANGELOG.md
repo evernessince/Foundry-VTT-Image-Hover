@@ -1,5 +1,28 @@
 # Version history
 
+# Changelog
+
+## 3.2 - 2026-05-19
+
+### Added The following features:
+- **Disable during comba settingt** (world/GM, off by default) — suppresses the popup while a combat encounter is active.
+- **Exclude tokens by tag** (world/GM) — An exclude filter to skip the image popup based on tags. (requires the tagger FoundryVTT Module)
+- **Popup graphic overlay** (per-user) — a decorative image (e.g. a frame) layered on the popup with associated positioning settings.
+
+### Fixed
+- `canvasPan` crash (`Cannot read properties of undefined (reading 'style')`) — repositioning now guards on render state.
+- Broken image/video URLs no longer hang forever — load failures are caught, cached, and logged once.
+- Rapid-hover race that closed/reopened the wrong token's art — the per-hover timer is now tracked and cleared.
+- Unbounded growth of the image dimension cache — it is now reset per scene.
+- Token-cache loop aborting early on the first actor-less token.
+- Null crash in the chat-portrait detection check.
+
+### Changed
+- Foundry v14 compatibility (v13 still supported): replaced the private `canvas.scene._viewPosition` with the live canvas transform, token-config hook uses `app.document` with an `app.token` fallback, manifest verified for v14.
+- World/GM settings now read fresh, so changes reach players immediately instead of going stale until a settings dialog is reopened.
+- Removed the non-standard global `event`; cursor and drag state are tracked via pointer listeners.
+- Internal cleanup: de-duplicated art-URL resolution, fixed naming/typos, removed dead and unused code, added defensive guards.
+
 ## Version 3.0.5
 
 - Hides art for tokens with imprecise vision.
